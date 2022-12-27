@@ -17,6 +17,10 @@ class MovieModel {
       this.durationMin,
       this.type,
       this.description});
+
+  static List<MovieModel> fromList(List<dynamic> data) =>
+      data.map((e) => MovieModel.fromJson(e)).toList();
+
   factory MovieModel.fromJson(Map<String, dynamic> json) =>
       _$MovieModelFromJson(json);
 
