@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/providers/common.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -14,7 +16,7 @@ class _LoginPageState extends State<LoginPage> {
 
   void _onSubmit() {
     if (_formKey.currentState!.validate()) {
-      print("Амжилттай");
+      Provider.of<CommonProvider>(context, listen: false).onLogin();
     }
   }
 
