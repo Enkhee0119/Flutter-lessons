@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/model/movie/index.dart';
 import 'package:movie_app/screens/movieDetail.dart';
+import 'package:movie_app/widgets/my_dialog.dart';
 
 class MovieCard extends StatelessWidget {
   final MovieModel data;
   const MovieCard(this.data, {super.key});
 
   void _onCardTap(BuildContext context) {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (_) => MovieDetailPage(data)));
+    showDialog(
+        // useSafeArea: false,
+        context: context,
+        builder: (context) => myDialog(data));
+    // Navigator.push(
+    //     context, MaterialPageRoute(builder: (_) => MovieDetailPage(data)));
   }
 
   @override

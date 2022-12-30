@@ -1,40 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/model/movie/index.dart';
 import 'package:provider/provider.dart';
 
+import '../model/movie/index.dart';
 import '../providers/common.dart';
 import '../utils/index.dart';
 
-class MovieDetailPage extends StatefulWidget {
+class myDialog extends StatelessWidget {
   final MovieModel data;
-  const MovieDetailPage(this.data, {super.key});
-
-  @override
-  State<MovieDetailPage> createState() => _MovieDetailPageState();
-}
-
-class _MovieDetailPageState extends State<MovieDetailPage> {
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      if (!Provider.of<CommonProvider>(context, listen: false).isLoggedIn) {
-        Provider.of<CommonProvider>(context, listen: false).changeCurrentIdx(2);
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text("Нэвтэрнэ үү")));
-        Navigator.pop(context);
-      }
-    });
-  }
+  const myDialog(this.data, {super.key});
 
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     return Consumer<CommonProvider>(
       builder: (context, provider, child) {
-        return Scaffold(
+        return Dialog(
+          insetPadding: EdgeInsets.all(0),
           backgroundColor: Color.fromARGB(255, 24, 22, 22),
-          body: CustomScrollView(slivers: [
+          child: CustomScrollView(slivers: [
             // SliverAppBar(
             //   title: Text(data.title),
             // ),
@@ -48,7 +31,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                     fit: StackFit.expand,
                     children: [
                       Image.network(
-                        widget.data.imgUrl,
+                        data.imgUrl,
                         width: width,
                         fit: BoxFit.fitWidth,
                       ),
@@ -67,7 +50,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                             ),
                             SizedBox(height: 20),
                             Text(
-                              widget.data.title,
+                              data.title,
                               style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
@@ -75,7 +58,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                             ),
                             SizedBox(height: 20),
                             Text(
-                              "${widget.data.publishedYear}он | ${Utils.integerMinToString(widget.data.durationMin)} | ${widget.data.type}",
+                              "${data.publishedYear}он | ${Utils.integerMinToString(data.durationMin)} | ${data.type}",
                               style: TextStyle(color: Color(0xffcccccc)),
                             ),
                             SizedBox(height: 50)
@@ -99,13 +82,13 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                         alignment: Alignment.topRight,
                         child: IconButton(
                           icon: Icon(
-                            provider.isWishMovie(widget.data)
+                            provider.isWishMovie(data)
                                 ? Icons.favorite
                                 : Icons.favorite_border,
                             color: Colors.white,
                             size: 30,
                           ),
-                          onPressed: () => provider.addWishList(widget.data.id),
+                          onPressed: () => provider.addWishList(data.id),
                         ),
                       ))
                     ],
@@ -123,7 +106,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                     ),
                     SizedBox(height: 20),
                     Text(
-                      widget.data.description ?? "",
+                      data.description ?? "",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Color(0xffbbbbbb),
