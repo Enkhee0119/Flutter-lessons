@@ -7,6 +7,8 @@ class CommonProvider extends ChangeNotifier {
   int currentIdx = 0;
   bool isLoggedIn = false;
 
+  get specialData => null;
+
   void setMovies(List<MovieModel> data) {
     movies = data;
     notifyListeners();

@@ -7,10 +7,10 @@ class MovieSpecialCard extends StatelessWidget {
   final MovieModel data;
   const MovieSpecialCard(this.data, {super.key});
   void _onCardTap(BuildContext context) {
-    showBottomSheet(
-        context: context, builder: (context) => MyBottomSheet(data));
-    // Navigator.push(
-    //     context, MaterialPageRoute(builder: (_) => MovieDetailPage(data)));
+    // showBottomSheet(
+    //     context: context, builder: (context) => MyBottomSheet(data));
+    Navigator.push(
+        context, MaterialPageRoute(builder: (_) => MovieDetailPage(data)));
   }
 
   @override

@@ -1,15 +1,20 @@
 import 'dart:js';
 
+import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:movie_app/bloc/movie/bloc.dart';
+import 'package:movie_app/bloc/movie/events.dart';
 import 'package:movie_app/global_keys.dart';
 import 'package:movie_app/providers/common.dart';
 import 'package:movie_app/screens/login.dart';
+import 'package:movie_app/services/api/index.dart';
 import 'package:provider/provider.dart';
 
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key});
+  final _bloc = MovieBloc();
+
   void _onChangeLanguage() {
     final context = GlobalKeys.navigatorKey.currentContext!;
     if (context.locale.languageCode == Locale('mn', 'MN').languageCode) {
@@ -25,6 +30,8 @@ class ProfilePage extends StatelessWidget {
     зургийн нэрийг хэвлэх*/
   }
 
+  void _onHttpRequest() async {}
+
   @override
   Widget build(BuildContext context) {
     return Consumer<CommonProvider>(
@@ -34,6 +41,10 @@ class ProfilePage extends StatelessWidget {
                 child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  ElevatedButton(
+                      onPressed: _onHttpRequest,
+                      child: Text("Http хүсэлт илгээх")),
+                  SizedBox(height: 20),
                   ElevatedButton(
                       onPressed: () => _onImagePick(ImageSource.gallery),
                       child: Text("Зургийн сан нээх")),
